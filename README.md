@@ -27,13 +27,15 @@ Tests for this project use the truffle framework and are written in JavaScript. 
 
 #### Running the Application
 
-The front end of the application is configured by default to run using the instance of the DApp deployed to the Rinkeby test network. Please ensure you have Metamask installed, running and can connect to Rinkeby.
+The front end of the application is configured by default to run using the instance of the DApp deployed to the Ropsten test network. Please ensure you have Metamask installed, running and can connect to Ropsten.
 
 To access to DApp front-end in the browser:
 1. From the project root directory `cd client`
 2. Install dependencies with `npm install`
 3. Serve the application by running `npm run dev`
 4. In browser, navigate to `localhost:3000`
+
+*Note: I know the course suggested using Rinkeby as the testnet, but I found that getting testnet Ether on Ropsten was much simpler so decided to use it instead. Testnet ether can be requested from https://faucet.ropsten.be/*
 
 #### What the DApp does
 
@@ -59,3 +61,11 @@ When you launch the DApp, you will be taken to the homescreen which essentially 
 For best experience, you will need to have at least two accounts configured in Metamask so you can switch between acting as the borrower and as the lender.
 
 **Note: Please ensure you are connected to the Rinkeby network using Metamask**
+
+#### Reviewing the Smart Contracts
+
+To view the source code of the Smart Contracts for this DApp, please navigate to `./contracts/LoanFactory.sol`. This file contains both contracts used in the application and has comments that should help give you a better understanding of how the underlying contracts work.
+
+#### Other Smart Contracts used in this Project
+
+In order to ensure the Circuit Breaker function was securely implemented to allow only the creator of the application to pause the creation of new loans in the event of a problem, Open Zeppelin's `Ownable.sol` contract has been installed using EthPM. 
