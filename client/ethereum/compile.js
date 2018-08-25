@@ -7,7 +7,8 @@ fs.removeSync(buildPath);
 
 const loanPath = path.resolve(__dirname, 'contracts', 'LoanFactory.sol');
 const source = fs.readFileSync(loanPath, 'utf8');
-const output = solc.compile(source, 1).contracts;
+const output = solc.compile(source, 2).contracts;
+console.log(output);
 
 fs.ensureDirSync(buildPath);
 

@@ -3,33 +3,33 @@ import { Button, Table } from 'semantic-ui-react';
 import { Link } from '../../../routes';
 import Layout from '../../../components/Layout';
 import Loan from '../../../ethereum/loan';
-import RequestRow from '../../../components/RequestRow';
+import WithdrawalRow from '../../../components/WithdrawalRow';
 
 class WithdrawalIndex extends Component {
   static async getInitialProps(props) {
     const { address } = props.query;
     const loan = Loan(address);
-    withdrawalsCount = await loan.methods.getWithdrawalsCount().call();
+    const withdrawalsCount = await loan.methods.getWithdrawalsCount().call();
     //const approversCount = await campaign.methods.approversCount().call();
 
     const withdrawals = await Promise.all(
-      Array(parseInt(requestCount))
+      Array(parseInt(withdrawalsCount))
         .fill()
         .map((element, index) => {
           return loan.methods.withdrawals(index).call();
         })
     );
 
-    return { address, withdrawals, requestCount, approversCount };
+    return { address, withdrawals, withdrawalsCount };
   }
 
   renderRows() {
     return this.props.withdrawals.map((withdrawal, index) => {
       return (
-        <RequestRow
+        <WithdrawalRow
           key={index}
           id={index}
-          request={request}
+          withdrawal={withdrawal}
           address={this.props.address}
         />
       );
@@ -53,17 +53,17 @@ class WithdrawalIndex extends Component {
           <Header>
             <Row>
               <HeaderCell>ID</HeaderCell>
-              <HeaderCell>Description</HeaderCell>
-              <HeaderCell>Amount</HeaderCell>
+              <HeaderCell>Reason</HeaderCell>
+              <HeaderCell>Amount (ETH)</HeaderCell>
               <HeaderCell>Recipient</HeaderCell>
-              <HeaderCell>Approval Count</HeaderCell>
+              <HeaderCell>Approved</HeaderCell>
               <HeaderCell>Approve</HeaderCell>
               <HeaderCell>Finalize</HeaderCell>
             </Row>
           </Header>
           <Body>{this.renderRows()}</Body>
         </Table>
-        <div>Found {this.props.requestCount} requests.</div>
+        <div>Found {this.props.withdrawalsCount} requests.</div>
       </Layout>
     );
   }

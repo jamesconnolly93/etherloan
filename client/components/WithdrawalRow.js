@@ -3,7 +3,7 @@ import { Table, Button } from 'semantic-ui-react';
 import web3 from '../ethereum/web3';
 import Loan from '../ethereum/loan';
 
-class RequestRow extends Component {
+class WithdrawalRow extends Component {
   onApprove = async () => {
     const loan = Loan(this.props.address);
 
@@ -30,14 +30,14 @@ class RequestRow extends Component {
     return (
       <Row
         disabled={withdrawal.complete}
-        positive={readyToFinalize && !withdrawal.complete}
+        positive={readyToWithdraw && !withdrawal.complete}
       >
         <Cell>{id}</Cell>
-        <Cell>{request.description}</Cell>
+        <Cell>{withdrawal.purpose}</Cell>
         <Cell>{web3.utils.fromWei(withdrawal.value, 'ether')}</Cell>
-        <Cell>{request.recipient}</Cell>
+        <Cell>{withdrawal.recipient}</Cell>
         <Cell>
-          {withdrawal.approved}
+          {withdrawal.approved.toString()}
         </Cell>
         <Cell>
           {withdrawal.complete ? null : (
@@ -58,4 +58,4 @@ class RequestRow extends Component {
   }
 }
 
-export default RequestRow;
+export default WithdrawalRow;

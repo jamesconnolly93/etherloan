@@ -18,8 +18,8 @@ class LoanShow extends Component {
 			address: props.query.address,
 			description: summary[0],
 			balance: summary[1],
-			loanAmount: summary[3],
-			interest: summary[4],
+			loanAmount: summary[2],
+			interest: summary[3],
 			repaid: summary[5],
 			borrower: summary[6],
 		};

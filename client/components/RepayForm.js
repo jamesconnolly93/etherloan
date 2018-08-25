@@ -15,7 +15,8 @@ class RepayForm extends Component {
 		const loan = Loan(this.props.address);
 		// const principal = await web3.toBigNumber(loan.methods.loanAmount().call());
 		// const interest = await web3.toBigNumber(loan.methods.interest().call());
-		const repaymentAmount = await loan.methods.repaymentAmount.call();
+		const repaymentAmount = await loan.methods.repaymentAmount().call();
+		console.log(repaymentAmount);
 		this.setState({ loading: true, errorMessage: '' });
 
 		try {

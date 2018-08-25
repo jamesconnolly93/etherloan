@@ -37,7 +37,7 @@ class LoanNew extends Component {
 	render() {
 		return (
 			<Layout>
-				<h4>Create a Campaign</h4>
+				<h4>Request a Loan</h4>
 				<Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
 					<Form.Field>
 						<label>Reason for taking a loan</label>
